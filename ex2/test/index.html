@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="table-container">
+    <div class="table-column">Column 1</div>
+    <div class="table-column">Column 2</div>
+    <div class="table-column">Column 3</div>
+  </div>
+</body>
+</html>
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  
+}
+.reporter {
+  display: grid;
+  grid-template-columns: 50% 50% ;
+  margin-left: 100px; 
+  margin-right: 100px;
+}
+.reporter-text{
+  color: #cc0000;
+  grid-column: 1;
+  grid-row: 1;
+}
+.reporter time{
+  color:rgb(255, 0, 174);
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.reporter img{
+  border: 3px solid #3932a3;
+ float: right;
+}
+
+
+h1 {
+  color: rgb(51, 0, 255);
+  background-color: #ffee00;
+  text-align:center;
+  
+}
+h2{
+  color: rgb(255, 131, 226);
+  text-align:center;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.section{
+  display: grid;
+  grid-template-columns: 50% 50% ;
+  margin-left: 100px; 
+  margin-right: 100px;
+}
+.rim{
+  grid-column: 2;
+  grid-row: 2/span 2 ;
+  border-top: 3px solid #000000;
+  border-bottom: 3px solid #000000;
+  
+}
+.rim em{
+  text-align: center; 
+  padding: 10px;
+  font-size: 40px; 
+}
+.prog{
+  grid-column: 1;
+  grid-row: 2;
+}
+
+
+.luckd {
+  grid-column: 1 ; 
+  grid-row: 3/ span 2;
+  text-align: left; 
+}
+.luckd form {
+  display: inline-block;
+}
+footer {
+  background-color: #ffee00; 
+  text-align: center; 
+  color: #3932a3;
+  padding: 5px; 
+  
+}

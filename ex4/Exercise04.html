@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <div id="maincontainer"></div>
+        <script>
+            // สร้าง Web Worker
+            const worker = new Worker('worker.js');
+
+            // สร้างหัวข้อ (header) ด้วย JavaScript
+            const headerElement = document.createElement('h1');
+            headerElement.textContent = 'Exercise 04 : JavaScript&DOM';
+
+            // เพิ่มหัวข้อลงใน div ที่มี id เป็น "maincontainer"
+            const mainContainer = document.getElementById('maincontainer');
+            mainContainer.appendChild(headerElement);
+
+            // เริ่มต้นเวลาเมื่อหน้าเว็บโหลดเสร็จ
+            let startTime = null;
+            let timerInterval = null;
+
+            function startTimer() {
+                startTime = new Date();
+                timerInterval = setInterval(updateTimer, 1000);
+                updateTimer(); // เรียกให้แสดงเวลาเริ่มต้น
+            }
+
+            function updateTimer() {
+                const currentTime = new Date();
+                const elapsedTime = new Date(currentTime - startTime);
+
+                // แสดงเวลาโลก (GMT)
+                const timerText = elapsedTime.toISOString().substr(11, 8) + " GMT";
+
+                // แสดงเวลาบนปุ่ม
+                const button = document.querySelector('button');
+                button.textContent = timerText;
+            }
+
+            // เมื่อกดปุ่ม
+            function handleButtonClick() {
+                // ถ้าตอนนี้ไม่ได้เริ่มต้นเวลา ให้เริ่มต้นเวลา
+                if (startTime === null) {
+                    startTimer();
+                } else {
+                    // หยุดเวลา
+                    clearInterval(timerInterval);
+                    startTime = null;
+
+                    // ให้ปุ่มอยู่ที่ตำแหน่งเดิม
+                    const button = document.querySelector('button');
+                    button.style.position = 'static';
+                }
+            }
+
+            // เมื่อ Web Worker ส่งผลลัพธ์กลับมา
+            worker.addEventListener('message', function(e) {
+                const result = e.data;
+                console.log('ผลลัพธ์: ' + result);
+
+                // แสดงผลลัพธ์ที่ div ที่มี id เป็น "maincontainer"
+                const mainContainer = document.getElementById('maincontainer');
+                mainContainer.innerHTML = 'ผลลัพธ์: ' + result;
+            });
+
+            // เมื่อมีการเลื่อนหน้าจอ
+            window.addEventListener('scroll', function() {
+                // ถ้ามีการเลื่อนหน้าจอ ให้ปุ่มเคลื่อนไปยังมุมขวาบน
+                const button = document.querySelector('button');
+                button.style.position = 'fixed';
+                button.style.right = '0';
+                button.style.top = '0';
+            });
+
+        </script>
+        <button onclick="handleButtonClick()">เริ่มต้นเวลา</button>
+    </body>
+</html>
